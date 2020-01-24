@@ -11,10 +11,10 @@
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
-    "build:client-and-server-bundles": "ng build --prod && ng run intrinsik-app:server:production --bundleDependencies all",
+    "build:client-and-server-bundles": "ng build --prod && ng run intrinsik-app:server:production --configuration=production --bundleDependencies all",
     "ssr:serve": "nodemon --watch src/ -e ts,html,scss --exec \"npm run build:ssr && npm run serve:ssr\"",
     "start:heroku": "node dist/server",
-    "postinstall": "npm run build:ssr --prod"
+    "postinstall": "npm run build:ssr"
   },
   "private": true,
   "dependencies": {

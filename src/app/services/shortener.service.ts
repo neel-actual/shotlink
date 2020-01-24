@@ -4,8 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import {ShortLinkInterface} from '../interfaces/short-link.interface';
 import {environment} from '../../environments/environment';
 
-console.log('is prod', environment.production);
-
 @Injectable({
   providedIn: 'root'
 })
