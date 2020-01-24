@@ -28,7 +28,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist/browser');
 const BITLY_URL = 'https://api-ssl.bitly.com/v4/shorten';
-const BITLY_TOKEN = process.env.BITLY_TOKEN;
+const BITLY_TOKEN = process.env.BITLY_TOKEN || require('./.env').BITLY_TOKEN;
 import * as cors from 'cors';
 
 // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
@@ -40,16 +40,16 @@ app.engine('html', ngExpressEngine({
 app.set('view engine', 'html');
 app.set('views', DIST_FOLDER);
 
-// app.use(cors({
-//   origin: (origin, callback) => {
-//     // allow requests with no origin
-//     if (!origin) { return callback(null, true); }
-//     if (['http://localhost:4200', 'http://localhost:4000'].indexOf(origin) === -1) {
-//       return callback(new Error('message'), false);
-//     }
-//     return callback(null, true);
-//   }
-// }));
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin
+    if (!origin) { return callback(null, true); }
+    if (['http://localhost:4200', 'http://localhost:4000'].indexOf(origin) === -1) {
+      return callback(new Error('message'), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 // Example Express Rest API endpoints
 app.get('/api/shorten', (req, res) => {

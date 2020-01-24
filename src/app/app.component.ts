@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {LinkDialogComponent} from './link-dialog/link-dialog.component';
 import { ShortenerService } from './services/shortener.service';
+import { LocalStorageService } from './services/local-storage.service';
 import {ShortLinkInterface} from './interfaces/short-link.interface';
 import {
   animate,
@@ -38,8 +39,8 @@ export class AppComponent {
   loading: string[] = [];
   list: ShortLinkInterface[] = [];
 
-  constructor(public dialog: MatDialog, public shortenerService: ShortenerService) {
-
+  constructor(public dialog: MatDialog, public shortenerService: ShortenerService, public localStorageService: LocalStorageService) {
+    this.list = localStorageService.list();
   }
 
   openLinkAdd(evt): void {
@@ -58,6 +59,7 @@ export class AppComponent {
       this.loading.pop();
       data.created = new Date(data.created_at).toLocaleDateString();
       this.list.unshift(data);
+      this.localStorageService.store(this.list);
     });
   }
 
@@ -77,6 +79,7 @@ export class AppComponent {
 
   deleteUrl(index) {
     this.list.splice(index, 1);
+    this.localStorageService.store(this.list);
   }
 
   preventAccordion(evt) {
