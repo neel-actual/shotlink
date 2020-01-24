@@ -1,4 +1,3 @@
-import * as functions from 'firebase-functions';
 import * as request from 'request';
 // const config = functions.config();
 const BITLY_TOKEN = '7db656c989f354ea2e25f02a265937ccadda426d';
