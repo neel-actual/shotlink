@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  <span>Shotlink</span>
+</mat-toolbar>
+<mat-progress-bar *ngIf="loading.length" mode="indeterminate" color="accent"></mat-progress-bar>
+<mat-accordion @fadeAnimation class="url-card" *ngFor="let item of list; let i = index">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <a (click)="preventAccordion($event)" target="_blank" [href]="item.link">{{item.id}}</a>
+    </mat-expansion-panel-header>
+    <mat-list class="url-card-list">
+      <mat-list-item>Original: {{ item.long_url }}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Created: {{ item.created }}</mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+    <div class="url-card-buttons">
+      <button color="primary" mat-raised-button (click)="copyUrl(item.link)"><mat-icon>assignment</mat-icon></button>
+      <button mat-flat-button (click)="deleteUrl(i)"><mat-icon>delete</mat-icon></button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<button (click)="openLinkAdd($event)" mat-button class="mat-fab mat-bottom-right" color="primary" aria-label="Shorten url">
+  <mat-icon>add</mat-icon>
+</button>
