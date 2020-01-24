@@ -22,6 +22,8 @@ import * as express from 'express';
 import 'zone.js/dist/zone-node';
 import {join} from 'path';
 import * as request from 'request';
+import 'localstorage-polyfill';
+global['localStorage'] = localStorage;
 
 // Express server
 const app = express();
