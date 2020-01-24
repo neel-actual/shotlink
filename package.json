@@ -14,7 +14,7 @@
     "build:client-and-server-bundles": "ng build --prod && ng run intrinsik-app:server:production --bundleDependencies all",
     "ssr:serve": "nodemon --watch src/ -e ts,html,scss --exec \"npm run build:ssr && npm run serve:ssr\"",
     "start:heroku": "node dist/server",
-    "postinstall": "npm run build:ssr"
+    "postinstall": "npm run build:ssr -c production"
   },
   "private": true,
   "dependencies": {
